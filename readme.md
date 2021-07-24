@@ -4,7 +4,7 @@
 
 <h4> Specification </h4>
 <p>
-> PHP version: >7.2
+> PHP version: >7.2 <br>
 > App: Native PHP
 
 ### license
