@@ -1,5 +1,12 @@
 <?php
+	/*
+		* assessment 1
+		* params: input1
+	*/
+	
+	#import general functions
 	include "../general_functions.php";
+	
 	$res = [
 		"status" 	=> true,
 		"msg"		=> "",
@@ -29,24 +36,21 @@
 			return false;
 		}
 			
-		/*
-			* assessment 1
-			* params: input1
-		*/
+		#string palindrome
 		$input1 = strtolower($_GET["input1"]);
 		if(stringPalindrome($input1) === true){
 			$res = [
 				"status" 	=> true,
 				"msg"		=> "success",
 				"code"		=> 200,
-				"data" 		=> "true"						
+				"data" 		=> true
 			];					
 		} else {
 			$res = [
 				"status" 	=> true,
 				"msg"		=> "success",
 				"code"		=> 200,
-				"data" 		=> "false"						
+				"data" 		=> false
 			];		
 		}
 		echo json_encode($res);
@@ -55,7 +59,7 @@
 		} catch(Exception $e){
 			$res = [
 				"status" 	=> false,
-				"msg"		=> $e,
+				"msg"		=> "oops, something wrong",
 				"code"		=> 99
 			];
 			echo json_encode($res);	

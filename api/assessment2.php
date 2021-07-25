@@ -1,4 +1,10 @@
 <?php
+	/*
+		* assessment 2
+		* params: input1, input2
+	*/
+	
+	#import general functions
 	include "../general_functions.php";
 	$res = [
 		"status" 	=> true,
@@ -29,15 +35,10 @@
 			return false;
 		}
 			
-		/*
-			* assessment 2
-			* params: input1
-		*/
+		#merge string
 		$input1 = strtolower($_GET["input1"]);
 		$input2 = strtolower($_GET["input2"]);
 		$values = mergeString($input1, $input2);
-		
-		//echo "<pre>"; print_r(mergeString($input1, $input2)); exit;
 		
 		$res = [
 			"status" 	=> true,
@@ -52,7 +53,7 @@
 		} catch(Exception $e){
 			$res = [
 				"status" 	=> false,
-				"msg"		=> $e,
+				"msg"		=> "oops, something wrong",
 				"code"		=> 99
 			];
 			echo json_encode($res);	
