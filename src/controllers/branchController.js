@@ -19,7 +19,7 @@ exports.branchList = (req, res) => {
 			if(!data[0].length){
 				res.send({
 					status: false,
-					code: 101,
+					code: 100,
 					msg: "RecordNotFound!"
 				});
 				return false;
@@ -36,7 +36,7 @@ exports.branchList = (req, res) => {
 		.catch(err => {
 			res.status(500).send({
 				status: false,
-				code: 1001,
+				code: 1000,
 				msg: err.message
 			});
 			return false;
@@ -50,8 +50,9 @@ exports.getAll = (req, res) => {
 	console.log(req.body)
 	
 	let queries = `SELECT b.*, 
-						bp.meal_name, bp.capacity, bp.price, bp.day, bp.start_time, bp.end_time,
-						d.capacity AS demand_capacity, d.price AS demand_price 
+						bp.meal_name, bp.day, bp.start_time, bp.end_time,
+						case when bp.capacity is null then d.capacity else  bp.capacity end as capacity,
+						case when bp.price is null then d.price else  bp.price end as price
 					FROM branch AS b
 					LEFT JOIN branch_properties AS bp ON bp.bid = b.id AND bp.status = 1
 					LEFT JOIN demand AS d ON d.bid = b.id AND b.status = 1
@@ -106,7 +107,8 @@ exports.findById = (req, res) => {
 	
 	let queries = `SELECT b.*, 
 						bp.meal_name, bp.capacity, bp.price, bp.day, bp.start_time, bp.end_time,
-						d.capacity AS demand_capacity, d.price AS demand_price 
+						case when bp.capacity is null then d.capacity else  bp.capacity end as capacity,
+						case when bp.price is null then d.price else  bp.price end as price
 					FROM branch AS b
 					LEFT JOIN branch_properties AS bp ON bp.bid = b.id AND bp.status = 1
 					LEFT JOIN demand AS d ON d.bid = b.id AND b.status = 1
@@ -153,7 +155,8 @@ exports.searchFilter = (req, res) => {
 	console.log(req.headers)
 	console.log(req.body)
 	
-	if(typeof req.body.name === 'undefined' ||
+	if(typeof req.body.id === 'undefined' ||
+		typeof req.body.name === 'undefined' ||
 		typeof req.body.lat === 'undefined' ||
 		typeof req.body.log === 'undefined' ||
 		typeof req.body.price === 'undefined' ||
@@ -171,12 +174,17 @@ exports.searchFilter = (req, res) => {
 	
 	let queries = `SELECT b.*, 
 						bp.meal_name, bp.capacity, bp.price, bp.day, bp.start_time, bp.end_time,
-						d.capacity AS demand_capacity, d.price AS demand_price 
+						case when bp.capacity is null then d.capacity else  bp.capacity end as capacity,
+						case when bp.price is null then d.price else  bp.price end as price
 					FROM branch AS b
 					LEFT JOIN branch_properties AS bp ON bp.bid = b.id AND bp.status = 1
 					LEFT JOIN demand AS d ON d.bid = b.id AND b.status = 1
 					WHERE b.status = 1`;
 	
+	//by branchId//
+	if(req.body.id != 'false'){
+		queries += ` AND b.id = ${req.body.id}`;
+	}
 	//by name//
 	if(req.body.name != 'false'){
 		queries += ` AND (b.name ILIKE '%${req.body.name}%' OR bp.meal_name ILIKE '%${req.body.name}%')`;

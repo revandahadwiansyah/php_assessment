@@ -178,6 +178,72 @@
 			"response": []
 		},
 		{
+			"name": "Branch Property Lists",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "buffet a",
+							"type": "text"
+						},
+						{
+							"key": "lat",
+							"value": "false",
+							"type": "text"
+						},
+						{
+							"key": "log",
+							"value": "false",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "false",
+							"type": "text"
+						},
+						{
+							"key": "day",
+							"value": "false",
+							"type": "text"
+						},
+						{
+							"key": "start_time",
+							"value": "false",
+							"type": "text"
+						},
+						{
+							"key": "end_time",
+							"value": "false",
+							"type": "text"
+						},
+						{
+							"key": "id",
+							"value": "false",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/branches/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"branches",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "OnDemand",
 			"request": {
 				"method": "GET",

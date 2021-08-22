@@ -28,8 +28,8 @@ router.post('/api/logout', (req, res) => {
   });
 });
 
-//demo//
-router.post('/api/demo', branchController.branchList);
+//branchlist//
+router.get('/api/branchList', branchController.branchList);
 
 /*
  * branch: getAll, findById, searchFilter
@@ -38,6 +38,8 @@ router.post('/api/demo', branchController.branchList);
 
 router.get('/api/branches', branchController.getAll)
 .post('/api/branches', branchController.searchFilter);
+
+router.post('/api/branches/list', branchController.findById);
 
 /*
  * onDemand: getAll, findById, insertOne, updated, removed
