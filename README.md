@@ -29,7 +29,7 @@ _Below is an example of how you can instruct your audience on installing and set
    
 5. Product Details
    ```sh
-   [GET]: products
+   [GET]: /products
    ``` 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
